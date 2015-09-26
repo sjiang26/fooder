@@ -1,3 +1,102 @@
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {{#link-to 'index' class='navbar-brand'}}Fooder{{/link-to}}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li {{bind-attr class="isHome:active" }}>{{#link-to 'index'}}Home{{/link-to}}</li>
+                <li {{bind-attr class="isMatches:active" }}>{{#link-to 'matches'}}Matches{{/link-to}}</li>
+            </ul>
+            {{#if isAuthenticated}}
+            <ul class="nav navbar-right navbar-nav">
+                <li {{bind-attr class="isSettings:active" }}>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+                <li><a href="#" {{action 'logout'}}>Logout</a></li>
+            </ul>
+            {{else}}
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    {{input type="text" placeholder="Email" class="form-control" value=email}}
+                </div>
+                <div class="form-group">
+                    {{input type="password" placeholder="Password" class="form-control" value=password}}
+                </div>
+                <button type="submit" class="btn btn-success" {{action 'login'}}>Sign in</button>
+                <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal" {{action ''}}>Sign Up</button>
+            </form>
+            {{/if}}
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</nav>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Signup Form</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="signupName">Name</label>
+                            {{input type="text" class="form-control" value=signupName id="signupName" placeholder="Name"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            {{input type="text" class="form-control" value=signupEmail id="exampleInputEmail1" placeholder="Email"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            {{input type="password" class="form-control" value=signupPassword id="exampleInputPassword1" placeholder="Password"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="signupCheckboxes">Food Allergies</label>
+                            <div class="checkbox" id="signupCheckboxes">
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" name="allergicPeanuts" checked=allergicPeanuts}} Peanuts
+                                </label>
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" name="allergicGluten" checked=allergicGluten}} Gluten
+                                </label>
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" name="allergicShellfish" checked=allergicShellfish}} Shellfish
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupDiet">Dietary Restrictions</label>
+                            <select class="form-control" id="diet">
+                                <option value="None">None</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Pescatarian">Pescatarian</option>
+                                <option value="Paleo">Paleo</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{outlet}}
+    <hr>
+    <footer>
+        <p>&copy; Ashwin Sandy Nupur Hack CMU 2015</p>
+    </footer>
+</div>
+<!-- /container -->
