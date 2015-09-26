@@ -40,8 +40,17 @@ export default Ember.Controller.extend({
             });
         },
 
+        logout: function() {
+            this.setProperties({
+                currentUser: "",
+                currentName: "",
+                email: "",
+                password: ""
+            });
+        },
+
         signUp: function() {
-        	var _this = this;
+            var _this = this;
             var allergies = [];
             if (this.get('allergicShellfish')) {
                 allergies.push("Shellfish");
@@ -62,10 +71,10 @@ export default Ember.Controller.extend({
                 diet: diet
             });
             user.save().then(function() {
-            	var data = {
-            		email: _this.get('signupEmail'),
-            		password: _this.get('signupPassword')
-            	};
+                var data = {
+                    email: _this.get('signupEmail'),
+                    password: _this.get('signupPassword')
+                };
                 Ember.$.post('http://localhost:3000/session', data).then(function(response) {
                     _this.setProperties({
                         currentUser: response.user_id,
