@@ -1,1 +1,50 @@
+<h1>Start Browsing</h1>
+
+<script>
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 37:
+            nextRecipe();
+            break;
+        case 39:
+            saveRecipe();
+            break;
+    }
+};
+$(document).ready(function(){
+    $("#img-hover").hover(function(){
+        $(this).css("opacity", "0.5");
+        $("#recipe").css("display", "initial");
+        }
+});
+
+</script>
+
+<div class="container">
+	<div class="col-md-2">
+		<a onclick=nextRecipe()><img src="http://clipartzebraz.com/cliparts/fork-clipart/cliparti1_fork-clipart_03.jpg" width = 175px></a>
+	</div>
+	<div class="col-md-4" style="text-align:center">
+		<div style="position:relative">
+			<img src="http://162.61.226.249/PicOriginal/P121381314021014_5.jpg" id="img-hover"
+			width = 350px height = 200px >
+			<h3 id="recipe" style="position:absolute;display:none">Recipe</h3>
+		</div>
+		<h3 id="label" style="display:inline">Name of Dish</h3>
+		<h3 id="level" style="display:inline">Level of Difficulty</h3>
+		<div>
+		<h3 id="calories" style="display:inline">Calories</h3>
+		<h3 id="numIngredients" style="display:inline">Number of Ingredients</h3>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<a onclick=nextRecipe()><img src="http://cliparts101.com/files/152/1353DEBEA6E6C53FA1B9F56DDA4778EC/Spoon_11.png" width = 175px></a>
+	</div>
+	
+</div>
+
 {{outlet}}
+
+
+
+
