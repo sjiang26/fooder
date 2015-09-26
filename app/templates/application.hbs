@@ -10,13 +10,13 @@
             {{#link-to 'index' class='navbar-brand'}}Fooder{{/link-to}}
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+            {{#if isAuthenticated}}
             <ul class="nav navbar-nav">
                 <li {{bind-attr class="isHome:active" }}>{{#link-to 'index'}}Home{{/link-to}}</li>
                 <li {{bind-attr class="isMatches:active" }}>{{#link-to 'matches'}}Matches{{/link-to}}</li>
             </ul>
-            {{#if isAuthenticated}}
             <ul class="nav navbar-right navbar-nav">
-                <li {{bind-attr class="isSettings:active" }}>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+                <li {{bind-attr class="isSettings:active" }}>{{#link-to 'settings'}}{{currentName}}{{/link-to}}</li>
                 <li><a href="#" {{action 'logout'}}>Logout</a></li>
             </ul>
             {{else}}
@@ -88,10 +88,16 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Sign up</button>
+                    <button type="button" class="btn btn-primary" {{action 'signUp'}}>Sign up</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="alert alert-danger alert-dismissible" id="alertError" role="alert" style="display: none">
+        <button type="button" class="close" aria-label="Close" {{action 'closeError'}}>
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Error!</strong> Invalid email or password.
     </div>
     {{outlet}}
     <hr>
