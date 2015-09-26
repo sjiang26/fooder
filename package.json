@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "fooder",
   "version": "0.0.0",
-  "description": "Small description for frontend goes here",
+  "description": "Small description for fooder goes here",
   "private": true,
   "directories": {
     "doc": "doc",

@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'frontend',
+    modulePrefix: 'fooder',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
