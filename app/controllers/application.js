@@ -41,6 +41,7 @@ export default Ember.Controller.extend({
         },
 
         signUp: function() {
+        	var _this = this;
             var allergies = [];
             if (this.get('allergicShellfish')) {
                 allergies.push("Shellfish");
@@ -60,10 +61,22 @@ export default Ember.Controller.extend({
                 allergies: allergies,
                 diet: diet
             });
-            user.save();
-            this.setProperties({
-                currentUser: user.get('id'),
-                currentName: this.get('signupName'),
+            user.save().then(function() {
+            	var data = {
+            		email: _this.get('signupEmail'),
+            		password: _this.get('signupPassword')
+            	};
+                Ember.$.post('http://localhost:3000/session', data).then(function(response) {
+                    _this.setProperties({
+                        currentUser: response.user_id,
+                        currentName: response.user_name
+                    });
+                }, function(err) {
+                    if (err.status === 401) {
+                        Ember.$('#alertError').fadeIn();
+                    }
+                });
+
             });
             Ember.$('#myModal').modal('hide');
         },
